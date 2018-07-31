@@ -77,11 +77,21 @@ select count(inventory.film_id) from inventory where inventory.film_id=(select f
 
 * 7a. The music of Queen and Kris Kristofferson have seen an unlikely resurgence. As an unintended consequence, films starting with the letters `K` and `Q` have also soared in popularity. Use subqueries to display the titles of movies starting with the letters `K` and `Q` whose language is English.
 
+select sub.title from (select film.title from film where film.language_id=1) sub where sub.title like "K%" or sub.title like "Q%" 
+
 * 7b. Use subqueries to display all actors who appear in the film `Alone Trip`.
+
+select actor.first_name,actor.last_name from actor where actor_id in 
+(select film_actor.actor_id from film_actor where film_actor.film_id=
+(select film.film_id from film where film.title="Alone Trip"))
 
 * 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 
 * 7d. Sales have been lagging among young families, and you wish to target all family movies for a promotion. Identify all movies categorized as family films.
+
+select film.title from film where film.film_id in 
+(select film_category.film_id from film_category where film_category.category_id = 
+(select category.category_id from category where category.name="Family"))
 
 * 7e. Display the most frequently rented movies in descending order.
 
