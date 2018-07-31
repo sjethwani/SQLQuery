@@ -95,6 +95,8 @@ select film.title from film where film.film_id in
 
 * 7e. Display the most frequently rented movies in descending order.
 
+select inventory.film_id,film.title,count(inventory.film_id) as rental_count from film, inventory inner join rental on inventory.inventory_id=rental.inventory_id where film.film_id=inventory.film_id group by inventory.film_id order by rental_count desc
+
 * 7f. Write a query to display how much business, in dollars, each store brought in.
 
 * 7g. Write a query to display for each store its store ID, city, and country.
